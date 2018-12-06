@@ -42,14 +42,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txt_TagID = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.txt_Date = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txt_Time1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txt_Time2 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.btn_Go = new System.Windows.Forms.Button();
             this.txt_Log = new System.Windows.Forms.TextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txt_Date = new System.Windows.Forms.TextBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // btn_DataBase
@@ -174,30 +174,14 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "日期";
             // 
-            // txt_Date
-            // 
-            this.txt_Date.Location = new System.Drawing.Point(201, 122);
-            this.txt_Date.Name = "txt_Date";
-            this.txt_Date.Size = new System.Drawing.Size(85, 21);
-            this.txt_Date.TabIndex = 13;
-            this.txt_Date.Text = "180921";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(317, 128);
+            this.label8.Location = new System.Drawing.Point(292, 128);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 16;
             this.label8.Text = "时间";
-            // 
-            // txt_Time1
-            // 
-            this.txt_Time1.Location = new System.Drawing.Point(364, 125);
-            this.txt_Time1.Name = "txt_Time1";
-            this.txt_Time1.Size = new System.Drawing.Size(85, 21);
-            this.txt_Time1.TabIndex = 15;
-            this.txt_Time1.TextChanged += new System.EventHandler(this.txt_Time1_TextChanged);
             // 
             // label9
             // 
@@ -206,23 +190,6 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(0, 12);
             this.label9.TabIndex = 18;
-            // 
-            // txt_Time2
-            // 
-            this.txt_Time2.Location = new System.Drawing.Point(469, 125);
-            this.txt_Time2.Name = "txt_Time2";
-            this.txt_Time2.Size = new System.Drawing.Size(85, 21);
-            this.txt_Time2.TabIndex = 17;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(454, 131);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(11, 12);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "-";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // btn_Go
             // 
@@ -242,18 +209,54 @@
             this.txt_Log.Size = new System.Drawing.Size(506, 162);
             this.txt_Log.TabIndex = 21;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "HH:mm:ss";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(326, 122);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker1.TabIndex = 22;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            // 
+            // txt_Date
+            // 
+            this.txt_Date.Location = new System.Drawing.Point(201, 122);
+            this.txt_Date.Name = "txt_Date";
+            this.txt_Date.Size = new System.Drawing.Size(85, 21);
+            this.txt_Date.TabIndex = 13;
+            this.txt_Date.Text = "180921";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "yymmdd";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(191, 149);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(118, 21);
+            this.dateTimePicker2.TabIndex = 23;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.CustomFormat = "HH:mm:ss";
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(326, 149);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(200, 21);
+            this.dateTimePicker3.TabIndex = 24;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 418);
+            this.Controls.Add(this.dateTimePicker3);
+            this.Controls.Add(this.dateTimePicker2);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.txt_Log);
             this.Controls.Add(this.btn_Go);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.txt_Time2);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txt_Time1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txt_Date);
             this.Controls.Add(this.label6);
@@ -292,14 +295,14 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txt_TagID;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txt_Date;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txt_Time1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txt_Time2;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btn_Go;
         private System.Windows.Forms.TextBox txt_Log;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox txt_Date;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
     }
 }
 

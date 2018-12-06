@@ -140,6 +140,11 @@ namespace MySqlToExcel
 
             return lResult;
         }
+        public void alter_user_timetype(string date)
+        {
+            string usertable_name = "user" + date;
+            string sql = string.Format("select EntryTime from "+usertable_name+" WHERE TagID='{0}';", tag_id);
+        }
         public string Search_time1_by_id(int tag_id,string date)
         {
             string usertable_name = "user" + date;
@@ -174,14 +179,14 @@ namespace MySqlToExcel
             DateTime Time=new DateTime();
 
             //int cnt = 0;
-            if (retRows[0][6] != null)
+            if (retRows[0][7] != null)
             {
                 Time = Convert.ToDateTime(retRows[0][7].ToString());
             }
             //Time = Convert.ToDateTime(retRows[0][6].ToString());
 
-
-            return Time.ToString();
+            return retRows[0][7].ToString();
+            //return Time.ToString();
         }
 
         /// <summary>

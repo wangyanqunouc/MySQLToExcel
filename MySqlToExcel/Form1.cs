@@ -87,18 +87,23 @@ namespace MySqlToExcel
             }
             //m_strTagID = txt_TagID.Text;
             m_strDate = txt_Date.Text;
-            m_strTime1 = txt_Time1.Text;
-            m_strTime2 = txt_Time2.Text;
+            //m_strTime1 = txt_Time1.Text;
+           // m_strTime2 = txt_Time2.Text;
 
             string time1 = m_mysqlDB.Search_time1_by_id(m_strTagID, m_strDate);
             string time2 = m_mysqlDB.Search_time2_by_id(m_strTagID, m_strDate);
-            txt_Log.Text = time1+time2;
+            txt_Log.Text = time1 + time2 + dateTimePicker1.Text;
             //txt_Log.Text = time1;
 
 
         }
 
         private void txt_Time1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
 
         }
