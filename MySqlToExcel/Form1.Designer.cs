@@ -46,10 +46,11 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btn_Go = new System.Windows.Forms.Button();
             this.txt_Log = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.txt_Date = new System.Windows.Forms.TextBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.str_Time1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTime = new System.Windows.Forms.DateTimePicker();
+            this.str_Time2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimeCopy = new System.Windows.Forms.DateTimePicker();
+            this.test_excel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_DataBase
@@ -177,7 +178,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(292, 128);
+            this.label8.Location = new System.Drawing.Point(293, 127);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 12);
             this.label8.TabIndex = 16;
@@ -206,59 +207,72 @@
             this.txt_Log.Location = new System.Drawing.Point(25, 215);
             this.txt_Log.Multiline = true;
             this.txt_Log.Name = "txt_Log";
+            this.txt_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Log.Size = new System.Drawing.Size(506, 162);
             this.txt_Log.TabIndex = 21;
             // 
-            // dateTimePicker1
+            // str_Time1
             // 
-            this.dateTimePicker1.CustomFormat = "HH:mm:ss";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(326, 122);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 21);
-            this.dateTimePicker1.TabIndex = 22;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.str_Time1.CustomFormat = "HH:mm:ss";
+            this.str_Time1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.str_Time1.Location = new System.Drawing.Point(326, 122);
+            this.str_Time1.Name = "str_Time1";
+            this.str_Time1.Size = new System.Drawing.Size(200, 21);
+            this.str_Time1.TabIndex = 22;
+            this.str_Time1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // txt_Date
+            // dateTime
             // 
-            this.txt_Date.Location = new System.Drawing.Point(201, 122);
-            this.txt_Date.Name = "txt_Date";
-            this.txt_Date.Size = new System.Drawing.Size(85, 21);
-            this.txt_Date.TabIndex = 13;
-            this.txt_Date.Text = "180921";
+            this.dateTime.CustomFormat = "yymmdd";
+            this.dateTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTime.Location = new System.Drawing.Point(182, 122);
+            this.dateTime.Name = "dateTime";
+            this.dateTime.Size = new System.Drawing.Size(104, 21);
+            this.dateTime.TabIndex = 23;
             // 
-            // dateTimePicker2
+            // str_Time2
             // 
-            this.dateTimePicker2.CustomFormat = "yymmdd";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(191, 149);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(118, 21);
-            this.dateTimePicker2.TabIndex = 23;
+            this.str_Time2.CustomFormat = "HH:mm:ss";
+            this.str_Time2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.str_Time2.Location = new System.Drawing.Point(326, 149);
+            this.str_Time2.Name = "str_Time2";
+            this.str_Time2.Size = new System.Drawing.Size(200, 21);
+            this.str_Time2.TabIndex = 24;
             // 
-            // dateTimePicker3
+            // dateTimeCopy
             // 
-            this.dateTimePicker3.CustomFormat = "HH:mm:ss";
-            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker3.Location = new System.Drawing.Point(326, 149);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(200, 21);
-            this.dateTimePicker3.TabIndex = 24;
+            this.dateTimeCopy.CustomFormat = "yyyy-mm-dd";
+            this.dateTimeCopy.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeCopy.Location = new System.Drawing.Point(182, 149);
+            this.dateTimeCopy.Name = "dateTimeCopy";
+            this.dateTimeCopy.Size = new System.Drawing.Size(104, 21);
+            this.dateTimeCopy.TabIndex = 25;
+            // 
+            // test_excel
+            // 
+            this.test_excel.Location = new System.Drawing.Point(615, 127);
+            this.test_excel.Name = "test_excel";
+            this.test_excel.Size = new System.Drawing.Size(75, 23);
+            this.test_excel.TabIndex = 26;
+            this.test_excel.Text = "test_excel";
+            this.test_excel.UseVisualStyleBackColor = true;
+            this.test_excel.Click += new System.EventHandler(this.test_excel_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 418);
-            this.Controls.Add(this.dateTimePicker3);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.ClientSize = new System.Drawing.Size(751, 418);
+            this.Controls.Add(this.test_excel);
+            this.Controls.Add(this.dateTimeCopy);
+            this.Controls.Add(this.str_Time2);
+            this.Controls.Add(this.dateTime);
+            this.Controls.Add(this.str_Time1);
             this.Controls.Add(this.txt_Log);
             this.Controls.Add(this.btn_Go);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.txt_Date);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txt_TagID);
             this.Controls.Add(this.label5);
@@ -299,10 +313,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btn_Go;
         private System.Windows.Forms.TextBox txt_Log;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox txt_Date;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker str_Time1;
+        private System.Windows.Forms.DateTimePicker dateTime;
+        private System.Windows.Forms.DateTimePicker str_Time2;
+        private System.Windows.Forms.DateTimePicker dateTimeCopy;
+        private System.Windows.Forms.Button test_excel;
     }
 }
 

@@ -69,16 +69,6 @@ namespace MySqlToExcel
 
                 return;
             }
-
-            //string create_table_song_hash_list_sql
-               // = "CREATE TABLE IF NOT EXISTS `song_hash_list` ( `ID` int(20) unsigned NOT NULL AUTO_INCREMENT,  `HashID` int(20) DEFAULT NULL,  `SongID` int(20) DEFAULT NULL,  `TimeStamp` int(20) DEFAULT NULL,  PRIMARY KEY (`ID`)) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
-            //ExecuteNonQuery(create_table_song_hash_list_sql);
-
-            //string create_table_song_list_sql
-                //= "CREATE TABLE IF NOT EXISTS `song_list` (  `SongID` int(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'song id, autoincrement',  `SongName` longtext,  `SongLength` int(20) DEFAULT NULL,  PRIMARY KEY (`SongID`)) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
-           // ExecuteNonQuery(create_table_song_list_sql);
-
-            //LogOut.WriteLine(string.Format("打开数据库{0}:端口{1}:库名{2},成功！", DataSource, DBport, DataBase));
         }
 
         public bool ExecuteNonQuery(string sql)
@@ -98,10 +88,8 @@ namespace MySqlToExcel
 
             MySqlCommand mySqlCommand = getSqlCommand(sql);
 
-            //DateTime startTime = DateTime.Now;
             MySqlDataReader reader = mySqlCommand.ExecuteReader();
-            //double last_time = (DateTime.Now - startTime).TotalMilliseconds;
-            //LogOut.WriteLine(string.Format("MySQL ExecuteReader for {0:000.0}ms", last_time));
+            
 
             try
             {
@@ -140,34 +128,93 @@ namespace MySqlToExcel
 
             return lResult;
         }
-        public void alter_user_timetype(string date)
+        public void alter_ibeacon_timetype1(string date)
         {
-            string usertable_name = "user" + date;
-            string sql = string.Format("select EntryTime from "+usertable_name+" WHERE TagID='{0}';", tag_id);
+            string ibeacontable_name = "ibeacon" + date;
+            string sql = string.Format("alter table "+ibeacontable_name+" modify column Time varchar(50);");
+            ExecuteNonQuery(sql);
+
+        }
+        public void alter_ibeacon_timetype2(string date)
+        {
+            string ibeacontable_name = "ibeacon" + date;
+            string sql = string.Format("alter table " + ibeacontable_name + " modify column Time datetime;");
+            ExecuteNonQuery(sql);
+
         }
         public string Search_time1_by_id(int tag_id,string date)
         {
             string usertable_name = "user" + date;
 
-            string sql = string.Format("select EntryTime from "+usertable_name+" WHERE TagID='{0}';", tag_id);
+            string sql = string.Format("select * from "+usertable_name+" WHERE TagID='{0}';", tag_id);
             //获取表中的内容
             List<Object[]> retRows = ExecuteQuery(sql);
             //int num = retRows.Count;
             DateTime Time = new DateTime();
 
             //int cnt = 0;
-            if (retRows[0][0] != null)
+            if (retRows[0][6] != null)
             {
-                Time = Convert.ToDateTime(retRows[0][0].ToString());
+                Time = Convert.ToDateTime(retRows[0][6].ToString());
+            }
+
+            return retRows[0][6].ToString(); 
+        }
+        public string Search_final_result(string tag_id,string m_strDate,string m_strTime1, string m_strTime2)
+        {
+            string userTable_Name = "user" + m_strDate;
+            string ideaconTable_Name = "ibeacon"+m_strDate;
+            string baseStation = "basestation";
+            string[] result;
+            int k = 0;
+            //string sql = string.Format("select * from " + ideaconTable_Name + "," + baseStation + " where " + ideaconTable_Name + ".BSMAC=" + baseStation + ".BSMAC and TagID=" + tag_id + " and Time>='" + m_strTime1 + "' and Time<='" + m_strTime2+ "';");
+            //List<Object[]> retRows = ExecuteQuery(sql);
+            //查询所得原始表
+            for (string time = m_strTime1; ToTime.CompareTimes(time, m_strTime2); time=ToTime.convertTime(time, 90))//每90秒得到一个结果
+            {
+                for (string time1 = time; ToTime.CompareTimes(time1, ToTime.convertTime(time, 90)); time1 = ToTime.convertTime(time1, 10))//每十秒得到一个结果
+                {
+                    int k = 0;
+                    for (string time2 = time1; ToTime.CompareTimes(time1, ToTime.convertTime(time1, 10)); time2 = ToTime.convertTime(time2, 2))//每两秒得到一个结果
+                    {
+                        string time2_end = ToTime.convertTime(time2, 2);
+                        string sql = string.Format("select * from " + ideaconTable_Name + "," + baseStation + " where " + ideaconTable_Name + ".BSMAC=" + baseStation + ".BSMAC and TagID=" + tag_id + " and Time>='" + m_strTime1 + "' and Time<='" + m_strTime2 + "';");
+                        List<Object[]> retRows = ExecuteQuery(sql);
+                        
+                        foreach (object[] item in retRows)
+                        {
+                            if (int.Parse(item[3].ToString())>=k)
+                            {
+                                k = int.Parse(item[3].ToString());
+                                result[k] = item[1].ToString();
+                            }
+                            k++;
+                            LogOut.WriteLine(result[k]);
+                        }
+                    }//result数组被五个基站的Mac地址填满，下一步五选一
+
+                }
             }
             
-            return Time.ToString();
-
-            
-
-            //return num;
+            /*foreach (object[] item in retRows)
+            {
+                result += item[2].ToString() + "\t" + item[1].ToString() + "\t" + item[3].ToString() + "\t" + item[7].ToString() + "\t" + item[4].ToString() + "\t\r\n";
+                LogOut.WriteLine(item[4].ToString());
+                cnt++;
+            }*/
+            return result;
         }
-        public string Search_time2_by_id(int tag_id, string date)
+        public string Search_user_info(string tag_id, string m_strDate)
+        {
+            string userTable_Name = "user" + m_strDate;
+            string sql = string.Format("select * from " + userTable_Name+";");
+            //获取表中的内容
+            List<Object[]> retRows = ExecuteQuery(sql);
+            string result = retRows[0][1].ToString() + "\t" + retRows[0][2].ToString() + "\t" + retRows[0][3].ToString() + "\t" + retRows[0][5].ToString() + "\r\n";
+            LogOut.WriteLine(retRows[0][1].ToString() + "\t" + retRows[0][2].ToString() + "\t" + retRows[0][3].ToString() + "\t" + retRows[0][5].ToString()+"\r\n");
+            return result;
+        }
+        public string Search_time2_by_id(string tag_id, string date)
         {
             string usertable_name = "user" + date;
 
